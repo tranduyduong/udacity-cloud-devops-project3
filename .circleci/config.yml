@@ -12,9 +12,9 @@ commands:
           when: on_fail
           command: |
             echo 'hello world'
-            # aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
-            # aws s3 rm "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive
-            # aws cloudformation delete-stack --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
+            aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
+            aws s3 rm "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive
+            aws cloudformation delete-stack --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
 jobs:
   build-frontend:
     docker:
@@ -156,7 +156,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: 
+          fingerprints:
             - "a6:d3:92:f3:22:82:58:a8:c7:c3:14:54:35:b3:12:5f"
       - attach_workspace:
           at: ~/
@@ -175,6 +175,7 @@ jobs:
           command: |
             cd .circleci/ansible
             cat inventory.txt
+            export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment # Here's where you will add some code to rollback on failure    
 
