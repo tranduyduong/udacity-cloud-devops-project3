@@ -68,3 +68,7 @@ node_modules
 
 .env
 dist
+aws-secret
+new_user*
+udacity.cer
+x.sh
