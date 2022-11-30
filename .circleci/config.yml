@@ -236,7 +236,8 @@ jobs:
       - destroy-environment # Here's where you will add some code to rollback on failure      
 
   deploy-frontend:
-    docker: *node-base-image
+    docker:
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
